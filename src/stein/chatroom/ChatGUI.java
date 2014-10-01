@@ -39,7 +39,7 @@ public class ChatGUI extends JFrame {
 	private class SendButtonListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent arg0) {
-			theText.getText();
+			NetworkThread nt = new NetworkThread();
 
 		}
 	}
