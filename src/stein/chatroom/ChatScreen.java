@@ -144,7 +144,7 @@ public class ChatScreen extends JFrame{
 		
 	}
 	public static void main(String [] args){
-		ChatScreen screen = new ChatScreen("localhost", 8080);
+		ChatScreen screen = new ChatScreen("192.168.117.107", 3773);
 	}
 
 }
