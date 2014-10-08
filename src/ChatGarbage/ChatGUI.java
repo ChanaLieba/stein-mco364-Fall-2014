@@ -1,4 +1,4 @@
-package stein.chatroom;
+package ChatGarbage;
 
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;

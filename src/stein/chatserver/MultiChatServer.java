@@ -1,4 +1,4 @@
-package stein.chatroom;
+package stein.chatserver;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -12,7 +12,7 @@ public class MultiChatServer {
 
 	public static void main(String[] args) throws IOException {
 
-		ServerSocket serverSocket = new ServerSocket(9097);
+		ServerSocket serverSocket = new ServerSocket(8080);
 		BlockingQueue<String> messages = new LinkedBlockingQueue<String>();
 		List<Socket> sockets = new ArrayList<Socket>();
 		MessageSender sender = new MessageSender(sockets, messages);

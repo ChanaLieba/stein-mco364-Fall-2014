@@ -1,4 +1,4 @@
-package stein.chatroom;
+package ChatGarbage;
 
 import java.io.IOException;
 import java.io.OutputStream;

@@ -1,4 +1,4 @@
-package stein.chatroom;
+package stein.chatserver;
 
 import java.io.BufferedReader;
 import java.io.IOException;
