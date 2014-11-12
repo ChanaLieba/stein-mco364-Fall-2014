@@ -9,7 +9,6 @@ public class DrawListener implements MouseMotionListener {
 
 	public DrawListener(Canvas canvas) {
 		this.canvas = canvas;
-
 	}
 
 	@Override
@@ -18,12 +17,12 @@ public class DrawListener implements MouseMotionListener {
 		int y = e.getY();
 		canvas.setXandY(x, y);
 		canvas.repaint();
-		
+
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
+		canvas.setPoint(-1, -1);
 
 	}
 
