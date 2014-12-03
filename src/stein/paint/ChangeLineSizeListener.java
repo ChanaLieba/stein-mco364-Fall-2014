@@ -16,10 +16,11 @@ public class ChangeLineSizeListener implements MouseWheelListener {
 
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent e) {
-		int notches = e.getUnitsToScroll();
-		notches = notches * -1;
-		if (width + notches > 0) {
+		notches = e.getUnitsToScroll();
+		notches = (notches * -1)/3;
+		if ((width + notches) > 0) {
 			canvas.setStrokeInt(width + notches);
+			width = width + notches;
 		} else {
 			canvas.setStrokeInt(1);
 		}

@@ -11,44 +11,27 @@ import javax.swing.JComponent;
 
 public class Canvas extends JComponent {
 
-	int x;
-	int y;
-	int px;
-	int py;
 	BufferedImage img;
 	Graphics2D g2;
 	Color color = Color.BLACK;
 	int strokeInt = 5;
 	Stroke stroke = new BasicStroke(strokeInt);
+	RectangleListener listener;
 
 	public Canvas() {
 		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
+		listener = new RectangleListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(img, 0, 0, null);
+		listener.drawPreview((Graphics2D)g);
 	}
 
-	public void setXandY(int x, int y) {
-
-		g2 = (Graphics2D) img.getGraphics();
-		g2.setColor(color);
-		g2.setStroke(stroke);
-		if (this.x != -1 && this.y != -1) {
-			g2.drawLine(this.x, this.y, x, y);
-		}
-
-		this.x = x;
-		this.y = y;
-
-	}
-
-	public void setPoint(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
 
 	public void setColor(Color color) {
 		this.color = color;
@@ -65,5 +48,30 @@ public class Canvas extends JComponent {
 	public int getStrokeInt() {
 		return strokeInt;
 	}
+
+	public BufferedImage getImg() {
+		return img;
+	}
+
+	public void setImg(BufferedImage img) {
+		this.img = img;
+	}
+
+	public Graphics2D getG2() {
+		return g2;
+	}
+
+	public void setG2(Graphics2D g2) {
+		this.g2 = g2;
+	}
+
+	public Stroke getStroke() {
+		return stroke;
+	}
+
+	public void setStroke(Stroke stroke) {
+		this.stroke = stroke;
+	}
+	
 
 }
