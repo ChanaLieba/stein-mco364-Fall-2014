@@ -3,7 +3,7 @@ package stein.paint;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
-public class RectangleListener implements DrawListener {
+public class FillRectangleListener implements DrawListener {
 
 	private int pointXclicked;
 	private int pointXreleased;
@@ -11,7 +11,7 @@ public class RectangleListener implements DrawListener {
 	private int pointYreleased;
 	private Canvas canvas;
 
-	public RectangleListener(Canvas canvas) {
+	public FillRectangleListener(Canvas canvas) {
 		this.canvas = canvas;
 	}
 
@@ -68,10 +68,8 @@ public class RectangleListener implements DrawListener {
 	public void drawPreview(Graphics2D g) {
 		g.setColor(canvas.getColor());
 		g.setStroke(canvas.getStroke());
-		g.drawRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
+		g.fillRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		// g.drawRect(pointXclicked, pointYclicked,
-		// pointXreleased-pointXclicked, pointYreleased-pointYclicked);
 		canvas.repaint();
 
 	}
@@ -80,9 +78,8 @@ public class RectangleListener implements DrawListener {
 		Graphics2D g2 = (Graphics2D) canvas.getImg().getGraphics();
 		g2.setColor(canvas.getColor());
 		g2.setStroke(canvas.getStroke());
-		g2.drawRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
+		g2.fillRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		//g2.drawRect(pointXclicked, pointYclicked, pointXreleased - pointXclicked, pointYreleased - pointYclicked);
 		canvas.repaint();
 	}
 

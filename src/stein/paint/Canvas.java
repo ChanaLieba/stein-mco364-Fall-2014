@@ -16,11 +16,11 @@ public class Canvas extends JComponent {
 	Color color = Color.BLACK;
 	int strokeInt = 5;
 	Stroke stroke = new BasicStroke(strokeInt);
-	RectangleListener listener;
+	DrawListener listener;
 
 	public Canvas() {
 		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
-		listener = new RectangleListener(this);
+		listener = new PencilListener(this);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 	}
@@ -31,7 +31,45 @@ public class Canvas extends JComponent {
 		g.drawImage(img, 0, 0, null);
 		listener.drawPreview((Graphics2D)g);
 	}
-
+	
+	public void setDrawListenerToRectangle(){
+		this.removeMouseListener(listener);
+		this.removeMouseMotionListener(listener);
+		listener = new RectangleListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+	}
+	
+	public void setDrawListenerToPencil(){
+		this.removeMouseListener(listener);
+		this.removeMouseMotionListener(listener);
+		listener = new PencilListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+	}
+	
+	public void setDrawListenerToFillRectangle(){
+		this.removeMouseListener(listener);
+		this.removeMouseMotionListener(listener);
+		listener = new FillRectangleListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+	}
+	
+	public void setDrawListenerToOval(){
+		this.removeMouseListener(listener);
+		this.removeMouseMotionListener(listener);
+		listener = new FillOvalListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+	}
+	public void setDrawListenerToFillOVal(){
+		this.removeMouseListener(listener);
+		this.removeMouseMotionListener(listener);
+		listener = new OvalListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+	}
 
 	public void setColor(Color color) {
 		this.color = color;
@@ -73,5 +111,4 @@ public class Canvas extends JComponent {
 		this.stroke = stroke;
 	}
 	
-
 }

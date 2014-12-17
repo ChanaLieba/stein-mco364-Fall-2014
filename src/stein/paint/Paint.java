@@ -13,14 +13,12 @@ public class Paint extends JFrame {
 		this.setLocationRelativeTo(null);
 		Canvas canvas = new Canvas();
 		ColorPanel cPanel = new ColorPanel(this, canvas);
-		//PencilListener listener = new PencilListener(canvas);
-		RectangleListener listener = new RectangleListener(canvas);
+		ButtonPanel bPanel = new ButtonPanel(this,canvas);
 		ChangeLineSizeListener listener2 = new ChangeLineSizeListener(canvas);
-		canvas.addMouseMotionListener(listener);
-		canvas.addMouseListener(listener);
 		canvas.addMouseWheelListener(listener2);
 		add(canvas, BorderLayout.CENTER);
 		add(cPanel, BorderLayout.SOUTH);
+		add(bPanel,BorderLayout.NORTH);
 		this.setVisible(true);
 
 	}
