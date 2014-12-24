@@ -32,6 +32,7 @@ public class ButtonPanel extends JPanel {
 		FillRectangle.addActionListener(new FillRectangleThisListener());
 		Oval.addActionListener(new OvalThisListener());
 		FillOval.addActionListener(new FillOvalThisListener());
+		ClearScreen.addActionListener(new ClearScreenListener());
 		this.add(Pencil);
 		this.add(Rectangle);
 		this.add(FillRectangle);
@@ -39,6 +40,14 @@ public class ButtonPanel extends JPanel {
 		this.add(FillOval);
 		this.add(ClearScreen);
 		
+	}
+	
+	private class ClearScreenListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0){
+			canvas.clearCanvas();
+			//canvas.repaint();
+		}
 	}
 
 	private class PencilListener implements ActionListener {

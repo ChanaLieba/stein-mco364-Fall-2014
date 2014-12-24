@@ -32,6 +32,12 @@ public class Canvas extends JComponent {
 		listener.drawPreview((Graphics2D)g);
 	}
 	
+	public void clearCanvas(){
+		img = null;
+		this.repaint();
+		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
+	}
+	
 	public void setDrawListenerToRectangle(){
 		this.removeMouseListener(listener);
 		this.removeMouseMotionListener(listener);
