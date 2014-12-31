@@ -19,14 +19,15 @@ public class Canvas extends JComponent {
 	Stroke stroke = new BasicStroke(strokeInt);
 	DrawListener listener;
 	boolean clear;
-	//JButton button;
+
+	// JButton button;
 
 	public Canvas() {
 		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
 		listener = new PencilListener(this);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
-		//button = new JButton();
+		// button = new JButton();
 	}
 
 	@Override
@@ -38,6 +39,7 @@ public class Canvas extends JComponent {
 		} else {
 			clear = false;
 		}
+		
 	}
 
 	public void clearCanvas() {
@@ -135,6 +137,15 @@ public class Canvas extends JComponent {
 
 	public void setStroke(Stroke stroke) {
 		this.stroke = stroke;
+	}
+
+	public void setDrawListenerToLine() {
+		this.removeMouseListener(listener);
+		this.removeMouseMotionListener(listener);
+		listener = new LineListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+
 	}
 
 }

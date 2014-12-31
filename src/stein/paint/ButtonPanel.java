@@ -18,11 +18,13 @@ public class ButtonPanel extends JPanel {
 	private JFrame frame;
 	private Canvas canvas;
 	private JButton BucketFill;
+	private JButton Line;
 	
 	public ButtonPanel(JFrame frame, Canvas canvas){
 		this.canvas = canvas;
 		this.frame = frame;
 		Pencil = new JButton("Pencil");
+		Line = new JButton("Line");
 		Rectangle = new JButton("Rectangle");
 		FillRectangle = new JButton("Fill Rectangle");
 		Oval = new JButton("Oval");
@@ -36,14 +38,23 @@ public class ButtonPanel extends JPanel {
 		FillOval.addActionListener(new FillOvalThisListener());
 		ClearScreen.addActionListener(new ClearScreenListener());
 		BucketFill.addActionListener(new BucketFillListener());
+		Line.addActionListener(new LineListener());
 		this.add(Pencil);
 		this.add(Rectangle);
 		this.add(FillRectangle);
 		this.add(Oval);
 		this.add(FillOval);
+		this.add(Line);
 		this.add(ClearScreen);
 		this.add(BucketFill);
 		
+	}
+	
+	private class LineListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent a){
+			canvas.setDrawListenerToLine();
+		}
 	}
 	
 	private class BucketFillListener implements ActionListener {

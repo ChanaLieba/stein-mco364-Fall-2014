@@ -35,7 +35,6 @@ public class ColorPanel extends JPanel {
 		this.add(red);
 		this.add(strokeint);
 		this.add(currentcolor);
-		this.setVisible(true);
 
 	}
 
