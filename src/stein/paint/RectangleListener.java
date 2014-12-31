@@ -70,9 +70,6 @@ public class RectangleListener implements DrawListener {
 		g.setStroke(canvas.getStroke());
 		g.drawRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		// g.drawRect(pointXclicked, pointYclicked,
-		// pointXreleased-pointXclicked, pointYreleased-pointYclicked);
-		canvas.repaint();
 
 	}
 
@@ -82,7 +79,6 @@ public class RectangleListener implements DrawListener {
 		g2.setStroke(canvas.getStroke());
 		g2.drawRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		//g2.drawRect(pointXclicked, pointYclicked, pointXreleased - pointXclicked, pointYreleased - pointYclicked);
 		canvas.repaint();
 	}
 

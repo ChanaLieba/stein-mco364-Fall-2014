@@ -17,6 +17,7 @@ public class ButtonPanel extends JPanel {
 	private JButton ClearScreen;
 	private JFrame frame;
 	private Canvas canvas;
+	private JButton BucketFill;
 	
 	public ButtonPanel(JFrame frame, Canvas canvas){
 		this.canvas = canvas;
@@ -27,21 +28,30 @@ public class ButtonPanel extends JPanel {
 		Oval = new JButton("Oval");
 		FillOval = new JButton("Fill Oval");
 		ClearScreen = new JButton("Clear Screen");
+		BucketFill = new JButton("Bucket Fill");
 		Pencil.addActionListener(new PencilListener());
 		Rectangle.addActionListener(new RectangleThisListener());
 		FillRectangle.addActionListener(new FillRectangleThisListener());
 		Oval.addActionListener(new OvalThisListener());
 		FillOval.addActionListener(new FillOvalThisListener());
 		ClearScreen.addActionListener(new ClearScreenListener());
+		BucketFill.addActionListener(new BucketFillListener());
 		this.add(Pencil);
 		this.add(Rectangle);
 		this.add(FillRectangle);
 		this.add(Oval);
 		this.add(FillOval);
 		this.add(ClearScreen);
+		this.add(BucketFill);
 		
 	}
 	
+	private class BucketFillListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent a){
+			canvas.setDrawListenerToBucketFill();
+		}
+	}
 	private class ClearScreenListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0){

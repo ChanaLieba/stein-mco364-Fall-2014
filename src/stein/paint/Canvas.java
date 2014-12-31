@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 
+import javax.swing.JButton;
 import javax.swing.JComponent;
 
 public class Canvas extends JComponent {
@@ -17,59 +18,78 @@ public class Canvas extends JComponent {
 	int strokeInt = 5;
 	Stroke stroke = new BasicStroke(strokeInt);
 	DrawListener listener;
+	boolean clear;
+	//JButton button;
 
 	public Canvas() {
 		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
 		listener = new PencilListener(this);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
+		//button = new JButton();
 	}
 
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(img, 0, 0, null);
-		listener.drawPreview((Graphics2D)g);
+		if (clear == false) {
+			listener.drawPreview((Graphics2D) g);
+		} else {
+			clear = false;
+		}
 	}
-	
-	public void clearCanvas(){
+
+	public void clearCanvas() {
 		img = null;
-		this.repaint();
 		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
+		clear = true;
+		this.repaint();
+
 	}
-	
-	public void setDrawListenerToRectangle(){
+
+	public void setDrawListenerToRectangle() {
 		this.removeMouseListener(listener);
 		this.removeMouseMotionListener(listener);
 		listener = new RectangleListener(this);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 	}
-	
-	public void setDrawListenerToPencil(){
+
+	public void setDrawListenerToBucketFill() {
+		this.removeMouseListener(listener);
+		this.removeMouseMotionListener(listener);
+		listener = new BucketFillListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+
+	}
+
+	public void setDrawListenerToPencil() {
 		this.removeMouseListener(listener);
 		this.removeMouseMotionListener(listener);
 		listener = new PencilListener(this);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 	}
-	
-	public void setDrawListenerToFillRectangle(){
+
+	public void setDrawListenerToFillRectangle() {
 		this.removeMouseListener(listener);
 		this.removeMouseMotionListener(listener);
 		listener = new FillRectangleListener(this);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 	}
-	
-	public void setDrawListenerToOval(){
+
+	public void setDrawListenerToOval() {
 		this.removeMouseListener(listener);
 		this.removeMouseMotionListener(listener);
 		listener = new FillOvalListener(this);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 	}
-	public void setDrawListenerToFillOVal(){
+
+	public void setDrawListenerToFillOVal() {
 		this.removeMouseListener(listener);
 		this.removeMouseMotionListener(listener);
 		listener = new OvalListener(this);
@@ -116,5 +136,5 @@ public class Canvas extends JComponent {
 	public void setStroke(Stroke stroke) {
 		this.stroke = stroke;
 	}
-	
+
 }

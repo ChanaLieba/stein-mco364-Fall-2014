@@ -49,5 +49,9 @@ public class ColorPanel extends JPanel {
 		}
 
 	}
+	
+	public JLabel getStrokeInt(){
+		return strokeint;
+	}
 
 }

@@ -70,7 +70,7 @@ public class FillOvalListener implements DrawListener{
 		g.setStroke(canvas.getStroke());
 		g.fillOval(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		canvas.repaint();
+		//canvas.repaint();
 		
 	}
 	public void draw(){

@@ -70,7 +70,7 @@ public class FillRectangleListener implements DrawListener {
 		g.setStroke(canvas.getStroke());
 		g.fillRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		canvas.repaint();
+		//canvas.repaint();
 
 	}
 

@@ -8,10 +8,12 @@ public class ChangeLineSizeListener implements MouseWheelListener {
 	private int width;
 	private Canvas canvas;
 	private int notches = 0;
+	private ColorPanel panel;
 
-	public ChangeLineSizeListener(Canvas canvas) {
+	public ChangeLineSizeListener(Canvas canvas, ColorPanel panel) {
 		this.canvas = canvas;
 		width = canvas.getStrokeInt();
+		this.panel = panel;
 	}
 
 	@Override
@@ -24,5 +26,6 @@ public class ChangeLineSizeListener implements MouseWheelListener {
 		} else {
 			canvas.setStrokeInt(1);
 		}
+		panel.getStrokeInt().setText("Stroke Int: " + width);
 	}
 }
