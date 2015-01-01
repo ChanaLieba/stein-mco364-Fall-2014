@@ -43,13 +43,15 @@ public class ColorPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			color = JColorChooser.showDialog(frame, "Select a color", color);
+
 			canvas.setColor(color);
+
 			currentcolor.setBackground(canvas.getColor());
 		}
 
 	}
-	
-	public JLabel getStrokeInt(){
+
+	public JLabel getStrokeInt() {
 		return strokeint;
 	}
 
