@@ -20,9 +20,8 @@ public class ColorPanel extends JPanel {
 	private JLabel currentcolor;
 	private String s;
 
-	public ColorPanel(JFrame frame, Canvas canvas) {
+	public ColorPanel(Canvas canvas) {
 		this.canvas = canvas;
-		this.frame = frame;
 		red = new JButton("COLOR SET");
 		red.addActionListener(new ColorButtonListener());
 		s = "Stroke size: " + canvas.getStrokeInt();
@@ -43,9 +42,7 @@ public class ColorPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			color = JColorChooser.showDialog(frame, "Select a color", color);
-
 			canvas.setColor(color);
-
 			currentcolor.setBackground(canvas.getColor());
 		}
 

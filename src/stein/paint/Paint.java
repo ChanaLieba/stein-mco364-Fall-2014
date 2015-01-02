@@ -12,7 +12,7 @@ public class Paint extends JFrame {
 		this.setSize(800, 600);
 		this.setLocationRelativeTo(null);
 		Canvas canvas = new Canvas();
-		ColorPanel cPanel = new ColorPanel(this, canvas);
+		ColorPanel cPanel = new ColorPanel(canvas);
 		ButtonPanel bPanel = new ButtonPanel(this,canvas);
 		ChangeLineSizeListener listener2 = new ChangeLineSizeListener(canvas, cPanel);
 		canvas.addMouseWheelListener(listener2);
