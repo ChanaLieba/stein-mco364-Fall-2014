@@ -70,7 +70,6 @@ public class FillRectangleListener implements DrawListener {
 		g.setStroke(canvas.getStroke());
 		g.fillRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		System.out.println("The preview color is:" + g.getColor().toString());
 		
 
 	}
@@ -81,7 +80,6 @@ public class FillRectangleListener implements DrawListener {
 		g2.setStroke(canvas.getStroke());
 		g2.fillRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		System.out.println("The color is:" + g2.getColor().toString());
 	}
 
 }
