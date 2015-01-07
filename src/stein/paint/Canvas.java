@@ -6,23 +6,40 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.ConnectException;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 
+import stein.paint.message.LoopbackNetworkModule;
+import stein.paint.message.NetworkModule;
+import stein.paint.message.OnlineNetworkModule;
+
 public class Canvas extends JComponent {
 
-	BufferedImage img;
-	Graphics2D g2;
-	Color color = Color.BLACK;
-	int strokeInt = 5;
-	Stroke stroke = new BasicStroke(strokeInt);
-	DrawListener listener;
-	boolean clear;
+	private BufferedImage img;
+	private Graphics2D g2;
+	private Color color = Color.BLACK;
+	private int strokeInt = 5;
+	private Stroke stroke = new BasicStroke(strokeInt);
+	private DrawListener listener;
+	private boolean clear;
+	private NetworkModule module;
 
 	// JButton button;
 
 	public Canvas() {
+		try{
+			PaintClient client = new PaintClient(this);
+			module = new OnlineNetworkModule(client);
+		}
+		catch(ConnectException e){
+			module = new LoopbackNetworkModule(this);
+		}
+		catch(IOException d){
+			d.printStackTrace();
+		}
 		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
 		listener = new PencilListener(this);
 		addMouseListener(listener);

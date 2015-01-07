@@ -1,7 +1,15 @@
 package stein.paint.message;
 
-public class PaintMessageFactory {
+import stein.paint.Canvas;
 
+public class PaintMessageFactory {
+	
+	private Canvas canvas;
+
+	public PaintMessageFactory(Canvas canvas){
+		this.canvas = canvas;
+	}
+	
 	public PaintMessage getMessage(String message) {
 
 		PaintMessage paintMessage = null;
@@ -23,7 +31,7 @@ public class PaintMessageFactory {
 			paintMessage = new ClearMessage();
 			break;
 		case "BUCKET_FILL":
-			paintMessage = new BucketFillMessage(Integer.valueOf(elements[1]), Integer.valueOf(elements[2]),
+			paintMessage = new BucketFillMessage(canvas, Integer.valueOf(elements[1]), Integer.valueOf(elements[2]),
 					Integer.valueOf(elements[3]));
 			break;
 

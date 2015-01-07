@@ -67,7 +67,6 @@ public class ButtonPanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0){
 			canvas.clearCanvas();
-			//canvas.repaint();
 		}
 	}
 
