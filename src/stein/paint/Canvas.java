@@ -30,14 +30,12 @@ public class Canvas extends JComponent {
 	// JButton button;
 
 	public Canvas() {
-		try{
+		try {
 			PaintClient client = new PaintClient(this);
 			module = new OnlineNetworkModule(client);
-		}
-		catch(ConnectException e){
+		} catch (ConnectException e) {
 			module = new LoopbackNetworkModule(this);
-		}
-		catch(IOException d){
+		} catch (IOException d) {
 			d.printStackTrace();
 		}
 		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
@@ -56,7 +54,7 @@ public class Canvas extends JComponent {
 		} else {
 			clear = false;
 		}
-		
+
 	}
 
 	public void clearCanvas() {
@@ -115,6 +113,23 @@ public class Canvas extends JComponent {
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 	}
+	
+	public void setDrawListenerToLine() {
+		this.removeMouseListener(listener);
+		this.removeMouseMotionListener(listener);
+		listener = new LineListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
+
+	}
+
+	public NetworkModule getModule() {
+		return module;
+	}
+
+	public void setModule(NetworkModule module) {
+		this.module = module;
+	}
 
 	public void setColor(Color color) {
 		this.color = color;
@@ -156,13 +171,5 @@ public class Canvas extends JComponent {
 		this.stroke = stroke;
 	}
 
-	public void setDrawListenerToLine() {
-		this.removeMouseListener(listener);
-		this.removeMouseMotionListener(listener);
-		listener = new LineListener(this);
-		addMouseListener(listener);
-		addMouseMotionListener(listener);
-
-	}
 
 }
