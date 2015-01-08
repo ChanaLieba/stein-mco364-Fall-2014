@@ -19,7 +19,6 @@ import stein.paint.message.OnlineNetworkModule;
 public class Canvas extends JComponent {
 
 	private BufferedImage img;
-	private Graphics2D g2;
 	private Color color = Color.BLACK;
 	private int strokeInt = 5;
 	private Stroke stroke = new BasicStroke(strokeInt);
@@ -27,9 +26,11 @@ public class Canvas extends JComponent {
 	private boolean clear;
 	private NetworkModule module;
 
-	// JButton button;
-
 	public Canvas() {
+		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
+		listener = new PencilListener(this);
+		addMouseListener(listener);
+		addMouseMotionListener(listener);
 		try {
 			PaintClient client = new PaintClient(this);
 			module = new OnlineNetworkModule(client);
@@ -38,11 +39,7 @@ public class Canvas extends JComponent {
 		} catch (IOException d) {
 			d.printStackTrace();
 		}
-		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
-		listener = new PencilListener(this);
-		addMouseListener(listener);
-		addMouseMotionListener(listener);
-		// button = new JButton();
+
 	}
 
 	@Override
@@ -54,7 +51,6 @@ public class Canvas extends JComponent {
 		} else {
 			clear = false;
 		}
-
 	}
 
 	public void clearCanvas() {
@@ -62,65 +58,14 @@ public class Canvas extends JComponent {
 		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
 		clear = true;
 		this.repaint();
-
 	}
 
-	public void setDrawListenerToRectangle() {
+	public void setDrawListener(DrawListener receivedListener) {
 		this.removeMouseListener(listener);
 		this.removeMouseMotionListener(listener);
-		listener = new RectangleListener(this);
+		listener = receivedListener;
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
-	}
-
-	public void setDrawListenerToBucketFill() {
-		this.removeMouseListener(listener);
-		this.removeMouseMotionListener(listener);
-		listener = new BucketFillListener(this);
-		addMouseListener(listener);
-		addMouseMotionListener(listener);
-
-	}
-
-	public void setDrawListenerToPencil() {
-		this.removeMouseListener(listener);
-		this.removeMouseMotionListener(listener);
-		listener = new PencilListener(this);
-		addMouseListener(listener);
-		addMouseMotionListener(listener);
-	}
-
-	public void setDrawListenerToFillRectangle() {
-		this.removeMouseListener(listener);
-		this.removeMouseMotionListener(listener);
-		listener = new FillRectangleListener(this);
-		addMouseListener(listener);
-		addMouseMotionListener(listener);
-	}
-
-	public void setDrawListenerToOval() {
-		this.removeMouseListener(listener);
-		this.removeMouseMotionListener(listener);
-		listener = new FillOvalListener(this);
-		addMouseListener(listener);
-		addMouseMotionListener(listener);
-	}
-
-	public void setDrawListenerToFillOVal() {
-		this.removeMouseListener(listener);
-		this.removeMouseMotionListener(listener);
-		listener = new OvalListener(this);
-		addMouseListener(listener);
-		addMouseMotionListener(listener);
-	}
-	
-	public void setDrawListenerToLine() {
-		this.removeMouseListener(listener);
-		this.removeMouseMotionListener(listener);
-		listener = new LineListener(this);
-		addMouseListener(listener);
-		addMouseMotionListener(listener);
-
 	}
 
 	public NetworkModule getModule() {
@@ -155,14 +100,6 @@ public class Canvas extends JComponent {
 		this.img = img;
 	}
 
-	public Graphics2D getG2() {
-		return g2;
-	}
-
-	public void setG2(Graphics2D g2) {
-		this.g2 = g2;
-	}
-
 	public Stroke getStroke() {
 		return stroke;
 	}
@@ -170,6 +107,5 @@ public class Canvas extends JComponent {
 	public void setStroke(Stroke stroke) {
 		this.stroke = stroke;
 	}
-
 
 }

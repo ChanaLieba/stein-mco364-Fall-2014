@@ -8,21 +8,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class ButtonPanel extends JPanel {
-	
+
 	private JButton Pencil;
 	private JButton Rectangle;
 	private JButton FillRectangle;
 	private JButton Oval;
 	private JButton FillOval;
 	private JButton ClearScreen;
-	private JFrame frame;
 	private Canvas canvas;
 	private JButton BucketFill;
 	private JButton Line;
-	
-	public ButtonPanel(JFrame frame, Canvas canvas){
+
+	public ButtonPanel(Canvas canvas) {
 		this.canvas = canvas;
-		this.frame = frame;
 		Pencil = new JButton("Pencil");
 		Line = new JButton("Line");
 		Rectangle = new JButton("Rectangle");
@@ -31,14 +29,14 @@ public class ButtonPanel extends JPanel {
 		FillOval = new JButton("Fill Oval");
 		ClearScreen = new JButton("Clear Screen");
 		BucketFill = new JButton("Bucket Fill");
-		Pencil.addActionListener(new PencilListener());
+		Pencil.addActionListener(new PencilThisListener());
 		Rectangle.addActionListener(new RectangleThisListener());
 		FillRectangle.addActionListener(new FillRectangleThisListener());
 		Oval.addActionListener(new OvalThisListener());
 		FillOval.addActionListener(new FillOvalThisListener());
 		ClearScreen.addActionListener(new ClearScreenListener());
-		BucketFill.addActionListener(new BucketFillListener());
-		Line.addActionListener(new LineListener());
+		BucketFill.addActionListener(new BucketFillThisListener());
+		Line.addActionListener(new LineThisListener());
 		this.add(Pencil);
 		this.add(Rectangle);
 		this.add(FillRectangle);
@@ -47,72 +45,67 @@ public class ButtonPanel extends JPanel {
 		this.add(Line);
 		this.add(ClearScreen);
 		this.add(BucketFill);
-		
+
 	}
-	
-	private class LineListener implements ActionListener{
+
+	private class LineThisListener implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent a){
-			canvas.setDrawListenerToLine();
+		public void actionPerformed(ActionEvent a) {
+			canvas.setDrawListener(new LineListener(canvas));
 		}
 	}
-	
-	private class BucketFillListener implements ActionListener {
+
+	private class BucketFillThisListener implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent a){
-			canvas.setDrawListenerToBucketFill();
+		public void actionPerformed(ActionEvent a) {
+			canvas.setDrawListener(new BucketFillListener(canvas));
 		}
 	}
+
 	private class ClearScreenListener implements ActionListener {
 		@Override
-		public void actionPerformed(ActionEvent arg0){
+		public void actionPerformed(ActionEvent arg0) {
 			canvas.clearCanvas();
 		}
 	}
 
-	private class PencilListener implements ActionListener {
+	private class PencilThisListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			canvas.setDrawListenerToPencil();
+			canvas.setDrawListener(new PencilListener(canvas));
 		}
-		
 	}
-	
+
 	private class RectangleThisListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			canvas.setDrawListenerToRectangle();
+			canvas.setDrawListener(new RectangleListener(canvas));
 		}
-		
 	}
-	
-	private class FillRectangleThisListener implements ActionListener{
+
+	private class FillRectangleThisListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			canvas.setDrawListenerToFillRectangle();
-			
+			canvas.setDrawListener(new FillRectangleListener(canvas));
 		}
-		
 	}
-	private class FillOvalThisListener implements ActionListener{
+
+	private class FillOvalThisListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			canvas.setDrawListenerToOval();
-			
+			canvas.setDrawListener(new FillOvalListener(canvas));
 		}
-		
 	}
-	private class OvalThisListener implements ActionListener{
+
+	private class OvalThisListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			canvas.setDrawListenerToFillOVal();
-			
+			canvas.setDrawListener(new OvalListener(canvas));
 		}
-		
 	}
 }

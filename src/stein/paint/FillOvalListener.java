@@ -40,7 +40,6 @@ public class FillOvalListener implements DrawListener {
 	public void mousePressed(MouseEvent e) {
 		pointXclicked = e.getX();
 		pointYclicked = e.getY();
-		// System.out.println("Mouse pressed is called");
 
 	}
 

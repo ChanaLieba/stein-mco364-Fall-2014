@@ -8,22 +8,18 @@ import java.util.Stack;
 
 public class BucketFillListener implements DrawListener {
 	private Canvas canvas;
-	private Graphics2D g;
 	
 	public BucketFillListener(Canvas canvas) {
 		this.canvas = canvas;
-		this.g = canvas.getG2();
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -63,31 +59,26 @@ public class BucketFillListener implements DrawListener {
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void drawPreview(Graphics2D g) {
-		// TODO Auto-generated method stub
 
 	}
 

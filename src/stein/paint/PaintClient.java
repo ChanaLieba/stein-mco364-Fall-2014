@@ -20,6 +20,7 @@ public class PaintClient {
 	}
 
 	public void sendMessage(PaintMessage message) throws IOException {
+		//OutputStream output = socket.getOutputStream();
 		output.write(message.toString().getBytes());
 		output.flush();
 	}
