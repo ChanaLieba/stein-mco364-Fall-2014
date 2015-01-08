@@ -3,6 +3,10 @@ package stein.paint;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
+import stein.paint.message.LineMessage;
+import stein.paint.message.PaintMessage;
+import stein.paint.message.ShapeMessage;
+
 public class LineListener implements DrawListener {
 	
 	private int pointXclicked;
@@ -73,11 +77,16 @@ public class LineListener implements DrawListener {
 		
 	}
 	public void draw(){
-		Graphics2D g2 = (Graphics2D)canvas.getImg().getGraphics();
-		g2.setColor(canvas.getColor());
-		g2.setStroke(canvas.getStroke());
-		g2.drawLine(pointXclicked, pointYclicked, pointXreleased, pointYreleased);
-		canvas.repaint();
+		//Graphics2D g2 = (Graphics2D)canvas.getImg().getGraphics();
+		//g2.setColor(canvas.getColor());
+		//g2.setStroke(canvas.getStroke());
+		//g2.drawLine(pointXclicked, pointYclicked, pointXreleased, pointYreleased);
+		//canvas.repaint();
+		
+		PaintMessage msg = null;
+		msg = new LineMessage(pointXclicked, pointYclicked, pointXreleased, pointYreleased, canvas.getColor().getRGB(),
+				canvas.getStrokeInt());
+		canvas.getModule().sendMessage(msg);
 	}
 	
 	

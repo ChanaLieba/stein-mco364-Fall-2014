@@ -3,6 +3,9 @@ package stein.paint;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
+import stein.paint.message.PaintMessage;
+import stein.paint.message.ShapeMessage;
+
 public class FillRectangleListener implements DrawListener {
 
 	private int pointXclicked;
@@ -75,11 +78,13 @@ public class FillRectangleListener implements DrawListener {
 	}
 
 	public void draw() {
-		Graphics2D g2 = (Graphics2D) canvas.getImg().getGraphics();
-		g2.setColor(canvas.getColor());
-		g2.setStroke(canvas.getStroke());
-		g2.fillRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
-				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
+		PaintMessage msg = null;
+		msg = new ShapeMessage("RECT", Math.min(pointXclicked, pointXreleased),
+				Math.min(pointYclicked, pointYreleased), Math.abs(pointXclicked
+						- pointXreleased), Math.abs(pointYclicked
+						- pointYreleased), canvas.getColor().getRGB(),
+				canvas.getStrokeInt(), true);
+		canvas.getModule().sendMessage(msg);
 	}
 
 }

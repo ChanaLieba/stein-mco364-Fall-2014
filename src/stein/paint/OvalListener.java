@@ -3,6 +3,9 @@ package stein.paint;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
+import stein.paint.message.PaintMessage;
+import stein.paint.message.ShapeMessage;
+
 public class OvalListener implements DrawListener{
 	
 	private int pointXclicked;
@@ -70,16 +73,17 @@ public class OvalListener implements DrawListener{
 		g.setStroke(canvas.getStroke());
 		g.drawOval(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		//canvas.repaint();
 		
 	}
 	public void draw(){
-		Graphics2D g2 = (Graphics2D)canvas.getImg().getGraphics();
-		g2.setColor(canvas.getColor());
-		g2.setStroke(canvas.getStroke());
-		g2.drawOval(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
-				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
-		canvas.repaint();
+		PaintMessage msg = null;
+
+		msg = new ShapeMessage("OVAL", Math.min(pointXclicked, pointXreleased),
+				Math.min(pointYclicked, pointYreleased), Math.abs(pointXclicked
+						- pointXreleased), Math.abs(pointYclicked
+						- pointYreleased), canvas.getColor().getRGB(),
+				canvas.getStrokeInt(), false);
+		canvas.getModule().sendMessage(msg);
 	}
 
 }

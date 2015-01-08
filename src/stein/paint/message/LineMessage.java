@@ -26,7 +26,7 @@ public class LineMessage implements PaintMessage {
 	@Override
 	public void apply(Graphics2D g) {
 		g.setColor(new Color((int) color));
-		g.setStroke(new BasicStroke());
+		g.setStroke(new BasicStroke(stroke));
 		g.drawLine(x1, y1, x2, y2);
 
 	}

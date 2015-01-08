@@ -20,8 +20,8 @@ public class Canvas extends JComponent {
 
 	private BufferedImage img;
 	private Color color = Color.BLACK;
-	private int strokeInt = 5;
-	private Stroke stroke = new BasicStroke(strokeInt);
+	private int strokeInt;
+	private Stroke stroke;
 	private DrawListener listener;
 	private boolean clear;
 	private NetworkModule module;
@@ -39,6 +39,8 @@ public class Canvas extends JComponent {
 		} catch (IOException d) {
 			d.printStackTrace();
 		}
+		strokeInt = 5;
+		stroke = new BasicStroke(strokeInt);
 
 	}
 
@@ -86,6 +88,7 @@ public class Canvas extends JComponent {
 
 	public void setStrokeInt(int strokeInt) {
 		stroke = new BasicStroke(strokeInt);
+		this.strokeInt = strokeInt;
 	}
 
 	public int getStrokeInt() {

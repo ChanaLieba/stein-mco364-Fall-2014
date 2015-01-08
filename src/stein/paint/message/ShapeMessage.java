@@ -30,14 +30,14 @@ public class ShapeMessage implements PaintMessage {
 	@Override
 	public void apply(Graphics2D g) {
 		g.setColor(new Color(color));
-		g.setStroke(new BasicStroke());
-		if (type == "RECT") {
+		g.setStroke(new BasicStroke(stroke));
+		if (type.equals("RECT")) {
 			if (fill) {
 				g.fillRect(x, y, w, h);
 			} else if (!fill) {
 				g.drawRect(x, y, w, h);
 			}
-		} else if (type == "OVAL") {
+		} else if (type.equals("OVAL")) {
 			if (fill) {
 				g.fillOval(x, y, w, h);
 			} else if (!fill) {

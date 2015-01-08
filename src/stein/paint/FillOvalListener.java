@@ -74,20 +74,11 @@ public class FillOvalListener implements DrawListener {
 				Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased),
 				Math.abs(pointYclicked - pointYreleased));
-		// canvas.repaint();
 
 	}
 
 	public void draw() {
 		PaintMessage msg = null;
-		// Graphics2D g2 = (Graphics2D)canvas.getImg().getGraphics();
-		// g2.setColor(canvas.getColor());
-		// g2.setStroke(canvas.getStroke());
-		// g2.fillOval(Math.min(pointXclicked, pointXreleased),
-		// Math.min(pointYclicked, pointYreleased),
-		// Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked -
-		// pointYreleased));
-		// canvas.repaint();
 
 		msg = new ShapeMessage("OVAL", Math.min(pointXclicked, pointXreleased),
 				Math.min(pointYclicked, pointYreleased), Math.abs(pointXclicked
@@ -95,6 +86,7 @@ public class FillOvalListener implements DrawListener {
 						- pointYreleased), canvas.getColor().getRGB(),
 				canvas.getStrokeInt(), true);
 		canvas.getModule().sendMessage(msg);
+		canvas.repaint();
 	}
 
 }
