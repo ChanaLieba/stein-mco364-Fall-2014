@@ -20,7 +20,7 @@ public class PaintMessageFactory {
 		case "LINE":
 			paintMessage = new LineMessage(Integer.valueOf(elements[1]), Integer.valueOf(elements[2]),
 					Integer.valueOf(elements[3]), Integer.valueOf(elements[4]), Integer.valueOf(elements[5]),
-					Integer.valueOf(elements[5]));
+					Integer.valueOf(elements[6]));
 			break;
 		case "SHAPE":
 			paintMessage = new ShapeMessage(elements[1], Integer.valueOf(elements[2]), Integer.valueOf(elements[3]),
