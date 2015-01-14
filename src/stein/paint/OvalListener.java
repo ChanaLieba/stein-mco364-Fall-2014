@@ -48,15 +48,17 @@ public class OvalListener implements DrawListener{
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
 		draw();
-		
+		canvas.setShouldDrawPreview(false);
+
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
+		canvas.setShouldDrawPreview(true);
 		canvas.repaint();
-		
+
 	}
 
 	@Override

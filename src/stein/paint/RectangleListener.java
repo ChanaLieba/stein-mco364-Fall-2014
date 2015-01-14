@@ -48,6 +48,7 @@ public class RectangleListener implements DrawListener {
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
 		draw();
+		canvas.setShouldDrawPreview(false);
 
 	}
 
@@ -55,6 +56,7 @@ public class RectangleListener implements DrawListener {
 	public void mouseDragged(MouseEvent e) {
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
+		canvas.setShouldDrawPreview(true);
 		canvas.repaint();
 
 	}

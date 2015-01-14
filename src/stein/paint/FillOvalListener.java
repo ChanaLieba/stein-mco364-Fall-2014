@@ -48,14 +48,15 @@ public class FillOvalListener implements DrawListener {
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
 		draw();
+		canvas.setShouldDrawPreview(false);
 
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// get the xs and ys and then call canvas.repaint and canvas .
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
+		canvas.setShouldDrawPreview(true);
 		canvas.repaint();
 
 	}
