@@ -1,13 +1,14 @@
 package goFish;
 
 import java.awt.Dimension;
+import java.io.Serializable;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 
 @SuppressWarnings("serial")
-public class GameFrame extends JFrame {
+public class GameFrame extends JFrame implements Serializable{
 
 	// Data fields
 	private Game game;
@@ -38,10 +39,14 @@ public class GameFrame extends JFrame {
 
 		// Add the split pane to the JFrame
 		this.add(splitPane);
+		
+		//Thread
+		BackgroundThread thread = new BackgroundThread(this.game.getSocket(), this.status, this.game, this);
+		thread.start();
 
 		// JFrame details...
 		this.setSize(1300, 600);
-		this.setTitle("GO FISH by M. KERSTEIN");
+		this.setTitle(this.game.getMe());
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);

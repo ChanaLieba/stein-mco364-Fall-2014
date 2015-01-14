@@ -5,32 +5,33 @@
 package goFish;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 import javax.swing.ImageIcon;
 import javax.swing.JToggleButton;
 
 @SuppressWarnings("serial")
-public class Card extends JToggleButton implements Comparable<Card> {
+public class Card extends JToggleButton implements Comparable<Card>, Serializable{
 
 	// Data fields
 	private ImageIcon coverPic;
 	private ImageIcon face;
 	private ImageIcon disabledPic;
 	private int cardNum;
-	private char cardSuite;
+	private char suite;
 
 	// Constructor
 	public Card(int num, char suite) {
+		this.suite = suite;
 		this.setSize(600, 400);
 		this.coverPic = new ImageIcon("./RegularCards/b1fv.gif");
-		String faceLocation = "./RegularCards/" + suite +  num + ".gif";
+		String faceLocation = "./RegularCards/" + suite + num + ".gif";
 		this.face = new ImageIcon(faceLocation);
 		this.disabledPic = new ImageIcon("./RegularCards/b1fv.gif");
 		this.setIcon(coverPic);
 		this.setSelectedIcon(face);
 		this.setDisabledIcon(disabledPic);
 		this.cardNum = num;
-		this.cardSuite = suite;
 		this.setBackground(new Color(59, 194, 241));
 	}
 
@@ -59,5 +60,12 @@ public class Card extends JToggleButton implements Comparable<Card> {
 		}
 		return eq;
 	}
+
+	@Override
+	public String toString() {
+		return "Card [cardNum=" + cardNum + ", suite=" + suite + " is this enabled?" + this.isEnabled() + "]";
+	}
+	
+	
 
 }

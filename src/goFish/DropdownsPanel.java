@@ -11,8 +11,10 @@
 package goFish;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -30,6 +32,8 @@ public class DropdownsPanel extends JPanel {
 
 	// Constructor
 	public DropdownsPanel(Player[] playerList, Integer[] numberList) {
+		
+		
 		this.pickPlayer = new JLabel("Choose a player to request cards from.");
 		this.playerList = playerList;
 		this.players = new JComboBox<Player>(this.playerList);
@@ -37,7 +41,12 @@ public class DropdownsPanel extends JPanel {
 		this.pickCardNumber = new JLabel("Choose a card number to request.");
 		this.numberList = numberList;
 		this.numbers = new JComboBox<Integer>(this.numberList);
-
+		
+		//setBackground(pickPlayer);
+		//setBackground(players);
+		//setBackground(pickCardNumber);
+		//setBackground(numbers);
+		
 		JPanel player = new JPanel(new BorderLayout());
 		player.add(this.pickPlayer, BorderLayout.NORTH);
 		player.add(this.players, BorderLayout.SOUTH);
@@ -49,6 +58,12 @@ public class DropdownsPanel extends JPanel {
 		this.setLayout(new BorderLayout());
 		this.add(player, BorderLayout.NORTH);
 		this.add(number, BorderLayout.SOUTH);
+		setBackground(this);
+	}
+
+	private void setBackground(JComponent comp) {
+		comp.setOpaque(true);
+		comp.setBackground(Color.BLUE);
 	}
 
 	// Reset the dropdowns panel (essentially reconstructs the panel).

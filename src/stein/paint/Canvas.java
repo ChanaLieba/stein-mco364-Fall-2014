@@ -23,7 +23,7 @@ public class Canvas extends JComponent {
 	private int strokeInt;
 	private Stroke stroke;
 	private DrawListener listener;
-	private boolean clear;
+	private boolean shouldDrawPreview;
 	private NetworkModule module;
 
 	public Canvas() {
@@ -51,10 +51,8 @@ public class Canvas extends JComponent {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(img, 0, 0, null);
-		if (clear == false) {
+		if (shouldDrawPreview) {
 			listener.drawPreview((Graphics2D) g);
-		} else {
-			clear = false;
 		}
 	}
 
@@ -72,13 +70,9 @@ public class Canvas extends JComponent {
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 	}
-	
-	public boolean isClear() {
-		return clear;
-	}
 
-	public void setClear(boolean clear){
-		this.clear = clear;
+	public void setShouldDrawPreview(boolean clear){
+		this.shouldDrawPreview = clear;
 	}
 
 	public NetworkModule getModule() {

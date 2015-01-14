@@ -1,10 +1,11 @@
 package goFish;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
 @SuppressWarnings("serial")
-public class Pool extends ArrayList<Card> {
+public class Pool extends ArrayList<Card> implements Serializable{
 
 	// Data fields
 	private Random random;

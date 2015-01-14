@@ -7,16 +7,15 @@
  */
 package goFish;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Deck {
+public class Deck implements Serializable{
 
-	// Data fiels
 	private Card[] deck;
 	private int numInDeck;
 	private char[] suites;
 
-	// Constructor
 	public Deck() {
 		this.deck = new Card[52];
 		this.suites = new char[4];

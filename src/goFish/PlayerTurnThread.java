@@ -25,6 +25,8 @@ public class PlayerTurnThread extends Thread {
 	private JButton beginTurnButton;
 
 	private GameStatusPanel statusPanel;
+	private Player playerToAsk;
+	private int numToAsk;
 
 	// Constructor
 	public PlayerTurnThread(JLabel statTurnChoices, JLabel statTurnResult,
@@ -32,7 +34,7 @@ public class PlayerTurnThread extends Thread {
 			JLabel statTurnConclusion, DropdownsPanel drops,
 			ArrayList<PlayerPanel> panels, Game game, GameCardsPanel frame,
 			JButton nextTurnButton, JButton beginTurnButton,
-			GameStatusPanel stats) {
+			GameStatusPanel stats, Player pl, int numask) {
 		this.statTurnChoices = statTurnChoices;
 		this.statTurnResult = statTurnResult;
 		this.statDeal = statDeal;
@@ -46,6 +48,8 @@ public class PlayerTurnThread extends Thread {
 		this.nextTurnButton = nextTurnButton;
 		this.beginTurnButton = beginTurnButton;
 		this.statusPanel = stats;
+		this.playerToAsk = pl;
+		this.numToAsk = numask;
 	}
 
 	// Run method
@@ -56,7 +60,7 @@ public class PlayerTurnThread extends Thread {
 
 		// Set the drop down panels to invisible, as the player has already made
 		// his choice.
-		drops.setVisible(false);
+		//drops.setVisible(false);
 
 		// First check that the player hand is not empty!
 		// If the player has no cards, he cannot make a request and so he must
@@ -86,9 +90,8 @@ public class PlayerTurnThread extends Thread {
 					.setText("<html>Your turn is over. <br/>Press CONTINUE to proceed to the next turn.</html>");
 			int turns = game.getCurrentTurnNum() + 1;
 			game.setCurrentTurnNum(turns);
+			return;
 		} else {
-			Player playerToAsk = (Player) drops.getPlayers().getSelectedItem();
-			int numToAsk = (Integer) drops.getNumbers().getSelectedItem();
 			statTurnChoices.setText(game.getCurrentPlayer().toString()
 					+ ", you chose to ask " + playerToAsk.toString()
 					+ " for all cards of the value " + numToAsk + ".");
@@ -151,6 +154,7 @@ public class PlayerTurnThread extends Thread {
 						.setText("<html>Your turn is over. <br/>Press CONTINUE to proceed to the next turn.</html>");
 				int turns = game.getCurrentTurnNum() + 1;
 				game.setCurrentTurnNum(turns);
+				return;
 
 			} catch (NoMatchInHandException ex) {
 				// If the player asked does not have any of those cards...
@@ -168,6 +172,11 @@ public class PlayerTurnThread extends Thread {
 				} catch (EmptyPoolException e) {
 					// TODO Auto-generated catch block
 					statDeal.setText("Sorry, pool is empty. No cards to deal.");
+					statTurnConclusion
+					.setText("<html>Your turn is over. <br/>Press CONTINUE to proceed to the next turn.</html>");
+					int turns = game.getCurrentTurnNum() + 1;
+					game.setCurrentTurnNum(turns);
+					return;
 				}
 
 				statBook.setText("Does your hand currently contain a book?");
@@ -202,6 +211,12 @@ public class PlayerTurnThread extends Thread {
 						this.nextTurnButton.setEnabled(false);
 						this.beginTurnButton.setEnabled(false);
 						this.statTurnChoices.setText("GAME OVER!");
+						try {
+							sleep(100);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 						JOptionPane.showMessageDialog(null,
 								"This round of GO FISH has been won by... "
 										+ winnerNames);
@@ -214,7 +229,7 @@ public class PlayerTurnThread extends Thread {
 				}
 
 				// Check if the card dealt matches the number requested
-				if (c.getCardNum() == numToAsk) {
+				if (null!=(Integer)c.getCardNum()&&c.getCardNum() == numToAsk) {
 					statTurnConclusion
 							.setText("<html>The value of the card dealt("
 									+ c.getCardNum()

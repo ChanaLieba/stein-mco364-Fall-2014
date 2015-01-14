@@ -1,9 +1,10 @@
 package goFish;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Player {
+public class Player implements Serializable{
 
 	// Data fields
 	private String name;

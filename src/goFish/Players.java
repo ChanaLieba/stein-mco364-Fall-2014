@@ -1,8 +1,9 @@
 package goFish;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Players {
+public class Players implements Serializable{
 
 	// Data fields
 	private int numPlayers;
@@ -134,5 +135,17 @@ public class Players {
 	public int getNumPlayers() {
 		return this.numPlayers;
 	}
+	
+	//Given a name, get the player
+	public Player getPlayerFromName(String name){
+		Player p = null;
+		for(int i = 0; i<this.playerList.length; i++){
+			if(playerList[i].getName().equals(name)){
+				p=playerList[i];
+			}
+		}
+		return p;
+	}
+
 
 }

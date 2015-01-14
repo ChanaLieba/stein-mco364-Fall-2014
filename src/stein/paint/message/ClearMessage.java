@@ -19,7 +19,7 @@ public class ClearMessage implements PaintMessage {
 
 	@Override
 	public void apply(Graphics2D g) {
-		canvas.setClear(true);
+		canvas.setShouldDrawPreview(false);
 		g.setColor(Color.white);
 		g.fillRect(0, 0, 800, 600);
 		//canvas.repaint();

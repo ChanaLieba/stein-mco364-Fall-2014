@@ -2,7 +2,7 @@ package goFish;
 
 import java.io.Serializable;
 
-public class LinkedListIterator<T extends Serializable & Comparable<T>> {
+public class LinkedListIterator<T extends Serializable & Comparable<T>> implements Serializable {
 	private Node<T> ip; // reference to last Node referenced as iterator
 						// iterated through the list
 	private Node<T> h; // reference to head of list

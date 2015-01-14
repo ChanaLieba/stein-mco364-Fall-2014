@@ -1,11 +1,15 @@
 package goFish;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,6 +26,7 @@ public class GameStatusPanel extends JPanel {
 	private JLabel statBook;
 	private JLabel statBookResult;
 	private JLabel statTurnConclusion;
+	private AnimatedBackground ab;
 
 	// Dropdown menus for user choices
 	private DropdownsPanel drops;
@@ -45,10 +50,7 @@ public class GameStatusPanel extends JPanel {
 	// Constructor
 	public GameStatusPanel(GameFrame frame, Game game) {
 
-		// The GameFrame...
 		this.frame = frame;
-
-		// Set the Game object
 		this.game = game;
 
 		// Set all the status labels
@@ -61,9 +63,18 @@ public class GameStatusPanel extends JPanel {
 		this.statBook = new JLabel("");
 		this.statBookResult = new JLabel("");
 		this.statTurnConclusion = new JLabel("");
+		
+		this.ab = new AnimatedBackground();
 
+		String location1 = "./AnimatedCards/background2.gif";
+		Icon icon2 = new ImageIcon(location1);
+		JLabel label2 = new JLabel(icon2);
+		label2.setOpaque(true);
+		label2.setBackground(Color.BLUE);
 		// Create a panel with all the status labels
 		JPanel labels = new JPanel();
+		labels.setOpaque(true);
+		labels.setBackground(Color.BLUE);
 		labels.setLayout(new GridLayout(7, 1));
 		labels.add(this.statCurrentPlayer);
 		labels.add(this.statTurnChoices);
@@ -75,10 +86,14 @@ public class GameStatusPanel extends JPanel {
 
 		// Create the BEGIN TURN button
 		this.beginTurn = new JButton("BEGIN TURN");
+		this.beginTurn.setOpaque(true);
+		this.beginTurn.setBackground(Color.BLUE);
 		this.beginTurn.addActionListener(new BeginTurnListener());
 
 		// Create the NEXT TURN button
 		this.nextTurn = new JButton("CONTINUE");
+		this.nextTurn.setOpaque(true);
+		this.nextTurn.setBackground(Color.BLUE);
 		this.nextTurn.addActionListener(new NextTurnListener());
 
 		// Add the two buttons to a JPanel
@@ -93,6 +108,8 @@ public class GameStatusPanel extends JPanel {
 
 		// Add the dropdown menu and the buttons to a panel
 		JPanel menuAndButtons = new JPanel();
+		menuAndButtons.setOpaque(true);
+		menuAndButtons.setBackground(Color.BLUE);
 		menuAndButtons.setLayout(new BorderLayout());
 		menuAndButtons.add(this.drops, BorderLayout.NORTH);
 		menuAndButtons.add(buttonPanel, BorderLayout.SOUTH);
@@ -100,10 +117,20 @@ public class GameStatusPanel extends JPanel {
 		// Add all components to this GameStatusPanel
 		this.setLayout(new BorderLayout());
 		this.add(labels, BorderLayout.NORTH);
+		this.add(ab,BorderLayout.CENTER);
 		this.add(menuAndButtons, BorderLayout.SOUTH);
+		
+		//setComponentsToRightBackgounds((JComponent[]) this.getComponents());
 
 		// Set "me" to refer to this object
 		this.me = this;
+	}
+	
+	private void setComponentsToRightBackgounds(JComponent[] components){ 
+		for(int i =0 ; i < components.length; i++){
+			components[i].setOpaque(true);
+			components[i].setBackground(Color.BLUE);
+		}
 	}
 
 	// ActionListener for BEGIN TURN button
@@ -113,12 +140,12 @@ public class GameStatusPanel extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			beginTurn.setEnabled(false);
 			nextTurn.setEnabled(true);
-			PlayerTurnThread turn = new PlayerTurnThread(statTurnChoices,
-					statTurnResult, statDeal, statBook, statBookResult,
-					statTurnConclusion, drops, frame.getGameCardsPanel()
-							.getPanels(), game, frame.getGameCardsPanel(),
-					nextTurn, beginTurn, me);
-			turn.start();
+			String playerToAsk = ((Player) drops.getPlayers().getSelectedItem()).getName();
+			int numToAsk = (Integer) drops.getNumbers().getSelectedItem();
+			TurnMessage msg = new TurnMessage(2, playerToAsk, numToAsk);
+			msg.send(game.getSocket());
+			
+		
 		}
 	}
 
@@ -127,12 +154,11 @@ public class GameStatusPanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			nextTurn.setEnabled(false);
-			beginTurn.setEnabled(true);
-			NextTurnThread next = new NextTurnThread(game, drops,
-					statCurrentPlayer, statTurnChoices, statTurnResult,
-					statDeal, statBook, statBookResult, statTurnConclusion, me);
-			next.start();
+			ContinueMessage msg = new ContinueMessage(1);
+			msg.send(game.getSocket());
+			//nextTurn.setEnabled(false);
+			//beginTurn.setEnabled(true);
+			
 		}
 	}
 
@@ -146,4 +172,58 @@ public class GameStatusPanel extends JPanel {
 		this.statBookResult.setText("");
 		this.statTurnConclusion.setText("");
 	}
+
+	public JLabel getStatCurrentPlayer() {
+		return statCurrentPlayer;
+	}
+
+	public JLabel getStatTurnChoices() {
+		return statTurnChoices;
+	}
+
+	public JLabel getStatTurnResult() {
+		return statTurnResult;
+	}
+
+	public JLabel getStatDeal() {
+		return statDeal;
+	}
+
+	public JLabel getStatBook() {
+		return statBook;
+	}
+
+	public JLabel getStatBookResult() {
+		return statBookResult;
+	}
+
+	public JLabel getStatTurnConclusion() {
+		return statTurnConclusion;
+	}
+
+	public DropdownsPanel getDrops() {
+		return drops;
+	}
+
+	public JButton getBeginTurn() {
+		return beginTurn;
+	}
+
+	public JButton getNextTurn() {
+		return nextTurn;
+	}
+
+	public Game getGame() {
+		return game;
+	}
+
+	public GameFrame getFrame() {
+		return frame;
+	}
+
+	public GameStatusPanel getMe() {
+		return me;
+	}
+	
+	
 }

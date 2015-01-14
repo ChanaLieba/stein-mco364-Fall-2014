@@ -108,7 +108,7 @@ public class LinkedList<T extends Serializable & Comparable<T>> implements
 
 	// this class gives provides the internal iterator with its functionality
 
-	class LinkedListInternalIterator {
+	class LinkedListInternalIterator implements Serializable{
 		private Node<T> currentNode;
 
 		public LinkedListInternalIterator() {

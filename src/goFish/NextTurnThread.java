@@ -1,5 +1,6 @@
 package goFish;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class NextTurnThread extends Thread {
@@ -15,13 +16,16 @@ public class NextTurnThread extends Thread {
 	private JLabel statBookResult;
 	private JLabel statTurnConclusion;
 	private GameStatusPanel frame;
+	private Boolean isMe;
+	private JButton nextTurnButton;
+	private JButton beginTurnButton;
 
 	// Constructor
 	public NextTurnThread(Game game, DropdownsPanel drops,
 			JLabel statCurrentPlayer, JLabel statTurnChoices,
 			JLabel statTurnResult, JLabel statDeal, JLabel statBook,
 			JLabel statBookResult, JLabel statTurnConclusion,
-			GameStatusPanel frame) {
+			GameStatusPanel frame, JButton next, JButton begin) {
 		this.game = game;
 		this.drops = drops;
 		this.statCurrentPlayer = statCurrentPlayer;
@@ -32,6 +36,8 @@ public class NextTurnThread extends Thread {
 		this.statBookResult = statBookResult;
 		this.statTurnConclusion = statTurnConclusion;
 		this.frame = frame;
+		this.nextTurnButton = next;
+		this.beginTurnButton = begin;
 	}
 
 	@Override
@@ -39,7 +45,27 @@ public class NextTurnThread extends Thread {
 
 		// Get the current Player
 		Player current = game.getCurrentPlayer();
+		
+		if(game.getMe().equals(this.game.getCurrentPlayer().getName())){
+			this.isMe = true;
+		}else{
+			this.isMe = false;
+		}
+		
+		//If not isMe
+		if(!isMe){
+			this.drops.setEnabled(false);
+			this.drops.setVisible(false);
+			this.nextTurnButton.setEnabled(false);
+			this.beginTurnButton.setEnabled(false);
+		}else{
+			this.drops.setEnabled(true);
+			this.drops.setVisible(true);
+			this.nextTurnButton.setEnabled(false);
+			this.beginTurnButton.setEnabled(true);
+		}
 
+		
 		// Set the statCurrenPlayer panel to reflect the current player and
 		// clear all other panels
 		this.statTurnResult.setText("");
@@ -52,6 +78,7 @@ public class NextTurnThread extends Thread {
 
 		// First check that the player hand is not empty!
 		if (current.getHand().getList().size() == 0) {
+			this.drops.setVisible(false);
 			statTurnChoices
 					.setText("<html>You have no cards, and so you cannot make a request.<br/Press BEGIN TURN to proceed.</html>");
 		} else {
@@ -62,7 +89,6 @@ public class NextTurnThread extends Thread {
 			drops.resetDropdownsPanel(
 					game.getPlayers().allPlayersExcept(current),
 					current.allCardNumbersInHand());
-			drops.setVisible(true);
 			frame.revalidate();
 			frame.repaint();
 		}

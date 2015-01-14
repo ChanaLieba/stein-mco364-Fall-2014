@@ -1,11 +1,12 @@
 package goFish;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class PlayerHand extends LinkedList<Card> {
+public class PlayerHand extends LinkedList<Card> implements Serializable {
 
 	@Override
 	public void insert(Card data) {
@@ -93,12 +94,15 @@ public class PlayerHand extends LinkedList<Card> {
 	}
 
 	// Give all cards of specific number to another hand
-	public void giveCardsOfSpecificNumberToHand(int num,
-			PlayerHand aHand) throws NoMatchInHandException {
+	public void giveCardsOfSpecificNumberToHand(int num, PlayerHand aHand)
+			throws NoMatchInHandException {
 		int numFound = 0;
 		boolean finding = true;
 		Card aCard = new Card(num, 'd');
-		while (finding) {
+		Card Card2 = new Card(num, 'c');
+		Card Card3 = new Card(num, 's');
+		Card Card4 = new Card(num, 'h');
+		//while (finding) {
 			try {
 				Card removed = returnAndRemove(aCard);
 				aHand.insert(removed);
@@ -106,7 +110,28 @@ public class PlayerHand extends LinkedList<Card> {
 			} catch (Exception e) {
 				finding = false;
 			}
-		}
+			try {
+				Card removed = returnAndRemove(Card2);
+				aHand.insert(removed);
+				numFound++;
+			} catch (Exception e) {
+				finding = false;
+			}
+			try {
+				Card removed = returnAndRemove(Card3);
+				aHand.insert(removed);
+				numFound++;
+			} catch (Exception e) {
+				finding = false;
+			}
+			try {
+				Card removed = returnAndRemove(Card4);
+				aHand.insert(removed);
+				numFound++;
+			} catch (Exception e) {
+				finding = false;
+			}
+		//}
 		if (numFound == 0) {
 			throw new NoMatchInHandException();
 		}

@@ -1,26 +1,33 @@
 package goFish;
 
-public class Game {
+import java.io.Serializable;
+import java.net.Socket;
+
+public class Game implements Serializable{
 
 	// Data fields
 	private Pool pool;
 	private Players players;
 	private int currentTurnNumber;
+	private String me;
+	private Socket socket;
 
 	// Constructor
-	public Game(int numPlayers, String[] names) {
+	public Game(Pool pool, Players players, String me, Socket socket) {
 
-		// Instantiate a deck
-		Deck deck = new Deck();
-
-		// Pass the deck to create the Players
-		this.players = new Players(numPlayers, names, deck);
-
-		// Create the pool with remaining cards
-		this.pool = deck.createPool();
+		//All these fields are obtained from the server
+		this.pool = pool;
+		this.players = players;
+		this.me = me;
+		this.socket = socket;
 
 		// Set the turn number
 		this.currentTurnNumber = 1;
+		
+	}
+	
+	public Socket getSocket(){
+		return this.socket;
 	}
 
 	// Get players
@@ -58,6 +65,10 @@ public class Game {
 		} else {
 			return false;
 		}
+	}
+
+	public String getMe() {
+		return this.me;
 	}
 
 }

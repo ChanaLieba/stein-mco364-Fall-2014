@@ -16,12 +16,21 @@ public class PlayerPanel extends JPanel {
 	private PlayerHand hand;
 	private JLabel playerName;
 	private ArrayList<Book> books;
+	private String me;
+	boolean myPanel;
 
 	// Constructor
-	public PlayerPanel(Player p) {
+	public PlayerPanel(Player p, String name) {
+		this.me = name;
 		this.player = p;
 		this.hand = this.player.getHand();
 		this.books = this.player.getBooks();
+		
+		if(this.me.equals(p.getName())){
+			myPanel = true;
+		}else{
+			myPanel = false;
+		}
 
 		this.playerName = new JLabel(p.getName());
 		this.add(this.playerName);
@@ -32,11 +41,20 @@ public class PlayerPanel extends JPanel {
 			bs = new BookStack(this.books.get(i).getBookNum());
 			this.add(bs);
 		}
-
 		// Add the player's cards to the panel
 		ArrayList<Card> cards = hand.getList();
 		for (int i = 0; i < cards.size(); i++) {
+			Card c = cards.get(i);
+			if(!myPanel){
+				c.setEnabled(false);
+				c.setSelected(false);
+			}
+			if(myPanel){
+				c.setEnabled(true);
+				System.out.println(c.toString());
+			}
 			this.add(cards.get(i));
+			
 		}
 
 		this.setBackground(new Color(127, 226, 255));
@@ -54,27 +72,21 @@ public class PlayerPanel extends JPanel {
 			this.add(bs);
 		}
 		ArrayList<Card> cards = hand.getList();
-		for (int i = 0; i < cards.size(); i++) {
-			this.add(cards.get(i));
+		
+			for (int i = 0; i < cards.size(); i++) {
+				Card c = cards.get(i);
+				if(!myPanel){
+					c.setSelected(false);
+					c.setEnabled(false);
+				}
+				if(myPanel){
+					c.setEnabled(true);
+					System.out.println("RESET IS CALED" + c.toString());
+				}
+				this.add(c);
+			}
 		}
-
 	}
+	
 
-	public static void main(String[] args) throws InterruptedException {
-		String[] names = { "Naftali", "Miri" };
-		Game g = new Game(2, names);
-		PlayerPanel p = new PlayerPanel(g.getPlayers().getCurrentPlayer(1));
-		JFrame frame = new JFrame();
-		frame.setLocationRelativeTo(null);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.add(p, BorderLayout.CENTER);
-		frame.setSize(1200, 600);
-		frame.setVisible(true);
-		Thread.sleep(3000);
-		p.resetPlayerPanel(g.getPlayers().getCurrentPlayer(2));
-		p.repaint();
-		frame.repaint();
-		frame.setVisible(true);
 
-	}
-}

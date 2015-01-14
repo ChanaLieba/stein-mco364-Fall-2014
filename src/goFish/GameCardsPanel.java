@@ -1,23 +1,27 @@
 package goFish;
 
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class GameCardsPanel extends JPanel {
+public class GameCardsPanel extends JPanel implements Serializable{
 
 	// Data fields
 
 	// An arraylist of all the individual PlayerPanels
 	private ArrayList<PlayerPanel> panels;
 	private Game game;
+	private String me;
 
 	// Constructor
 	public GameCardsPanel(Game game) {
 		// The Game object
 		this.game = game;
+		this.me = game.getMe();
 
 		// The arraylist
 		this.panels = new ArrayList<PlayerPanel>();
@@ -29,7 +33,14 @@ public class GameCardsPanel extends JPanel {
 		PlayerPanel p;
 		Player[] list = this.game.getPlayers().getPlayerList();
 		for (int i = 0; i < this.game.getNumberOfPlayers(); i++) {
-			p = new PlayerPanel(list[i]);
+			p = new PlayerPanel(list[i], this.me);
+			//System.out.println("ME: "+this.me);
+			//System.out.println("PLAYER NAME: "+list[i].getName());
+			if(list[i].getName().equals(this.me)){
+			p.setOpaque(true);
+				p.setBackground(Color.RED);
+			}
+			//System.out.println("NOT MY NAME!");
 			this.panels.add(p);
 			this.add(p);
 		}
