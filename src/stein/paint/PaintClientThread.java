@@ -33,11 +33,11 @@ public class PaintClientThread extends Thread {
 				try {
 					PaintMessage msg = factory.getMessage(text);
 					msg.apply((Graphics2D) canvas.getImg().getGraphics());
-					canvas.repaint();
 				} catch (Exception e) {
 					e.printStackTrace();
 					continue;
 				}
+				canvas.repaint();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

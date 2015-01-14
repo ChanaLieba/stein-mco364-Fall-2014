@@ -3,6 +3,9 @@ package stein.paint;
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 
+import stein.paint.message.LineMessage;
+import stein.paint.message.PaintMessage;
+
 public class PencilListener implements DrawListener {
 	
 	private Integer px = null;
@@ -55,11 +58,10 @@ public class PencilListener implements DrawListener {
 		}
 		x = e.getX();
 		y = e.getY();
-		Graphics2D g2 = (Graphics2D) canvas.getImg().getGraphics();
-		g2.setColor(canvas.getColor());
-		g2.setStroke(canvas.getStroke());
 		if (x != -1 && y != -1) {
-			g2.drawLine(px, py, x, y);
+			PaintMessage msg = null;
+			msg = new LineMessage(px,py,x,y,canvas.getColor().getRGB(),canvas.getStrokeInt());
+			canvas.getModule().sendMessage(msg);
 		}
 		canvas.repaint();
 		px = x;

@@ -40,7 +40,6 @@ public class RectangleListener implements DrawListener {
 	public void mousePressed(MouseEvent e) {
 		pointXclicked = e.getX();
 		pointYclicked = e.getY();
-		// System.out.println("Mouse pressed is called");
 
 	}
 
@@ -54,7 +53,6 @@ public class RectangleListener implements DrawListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		// get the xs and ys and then call canvas.repaint and canvas .
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
 		canvas.repaint();
@@ -73,6 +71,7 @@ public class RectangleListener implements DrawListener {
 		g.setStroke(canvas.getStroke());
 		g.drawRect(Math.min(pointXclicked, pointXreleased), Math.min(pointYclicked, pointYreleased),
 				Math.abs(pointXclicked - pointXreleased), Math.abs(pointYclicked - pointYreleased));
+		System.out.println("PREVIEW IS CALLED");
 
 	}
 

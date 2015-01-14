@@ -6,14 +6,14 @@ import java.awt.Graphics2D;
 
 public class ShapeMessage implements PaintMessage {
 
-	String type;
-	int x;
-	int y;
-	int w;
-	int h;
-	int color;
-	int stroke;
-	boolean fill;
+	private String type;
+	private int x;
+	private int y;
+	private int w;
+	private int h;
+	private int color;
+	private int stroke;
+	private boolean fill;
 
 	public ShapeMessage(String type, Integer x, Integer y, Integer w,
 			Integer h, Integer color, Integer stroke, Boolean fill) {

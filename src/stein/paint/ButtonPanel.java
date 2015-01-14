@@ -4,23 +4,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import stein.paint.message.ClearMessage;
+import stein.paint.message.PaintMessage;
 
 public class ButtonPanel extends JPanel {
 
+	private static final long serialVersionUID = 1L;
+	private Canvas canvas;
 	private JButton Pencil;
 	private JButton Rectangle;
 	private JButton FillRectangle;
 	private JButton Oval;
 	private JButton FillOval;
 	private JButton ClearScreen;
-	private Canvas canvas;
 	private JButton BucketFill;
 	private JButton Line;
 
 	public ButtonPanel(Canvas canvas) {
 		this.canvas = canvas;
+
 		Pencil = new JButton("Pencil");
 		Line = new JButton("Line");
 		Rectangle = new JButton("Rectangle");
@@ -29,6 +33,7 @@ public class ButtonPanel extends JPanel {
 		FillOval = new JButton("Fill Oval");
 		ClearScreen = new JButton("Clear Screen");
 		BucketFill = new JButton("Bucket Fill");
+
 		Pencil.addActionListener(new PencilThisListener());
 		Rectangle.addActionListener(new RectangleThisListener());
 		FillRectangle.addActionListener(new FillRectangleThisListener());
@@ -37,6 +42,7 @@ public class ButtonPanel extends JPanel {
 		ClearScreen.addActionListener(new ClearScreenListener());
 		BucketFill.addActionListener(new BucketFillThisListener());
 		Line.addActionListener(new LineThisListener());
+
 		this.add(Pencil);
 		this.add(Rectangle);
 		this.add(FillRectangle);
@@ -45,7 +51,6 @@ public class ButtonPanel extends JPanel {
 		this.add(Line);
 		this.add(ClearScreen);
 		this.add(BucketFill);
-
 	}
 
 	private class LineThisListener implements ActionListener {
@@ -65,7 +70,8 @@ public class ButtonPanel extends JPanel {
 	private class ClearScreenListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			canvas.clearCanvas();
+			PaintMessage msg = new ClearMessage(canvas);
+			canvas.getModule().sendMessage(msg);
 		}
 	}
 

@@ -40,7 +40,6 @@ public class OvalListener implements DrawListener{
 	public void mousePressed(MouseEvent e) {
 		pointXclicked = e.getX();
 		pointYclicked = e.getY();
-		//System.out.println("Mouse pressed is called");
 		
 	}
 
@@ -54,7 +53,6 @@ public class OvalListener implements DrawListener{
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		//get the xs and ys and then call canvas.repaint and canvas .
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
 		canvas.repaint();

@@ -8,18 +8,18 @@ import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.ConnectException;
-
-import javax.swing.JButton;
 import javax.swing.JComponent;
 
+import stein.paint.message.ClearMessage;
 import stein.paint.message.LoopbackNetworkModule;
 import stein.paint.message.NetworkModule;
 import stein.paint.message.OnlineNetworkModule;
+import stein.paint.message.PaintMessage;
 
 public class Canvas extends JComponent {
 
 	private BufferedImage img;
-	private Color color = Color.BLACK;
+	private Color color;
 	private int strokeInt;
 	private Stroke stroke;
 	private DrawListener listener;
@@ -28,6 +28,8 @@ public class Canvas extends JComponent {
 
 	public Canvas() {
 		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
+		img.getGraphics().setColor(Color.white);
+		img.getGraphics().fillRect(0, 0, 800, 600);
 		listener = new PencilListener(this);
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
@@ -39,6 +41,7 @@ public class Canvas extends JComponent {
 		} catch (IOException d) {
 			d.printStackTrace();
 		}
+		color = Color.BLACK;
 		strokeInt = 5;
 		stroke = new BasicStroke(strokeInt);
 
@@ -55,12 +58,12 @@ public class Canvas extends JComponent {
 		}
 	}
 
-	public void clearCanvas() {
-		img = null;
-		img = new BufferedImage(800, 600, BufferedImage.TYPE_INT_ARGB);
-		clear = true;
-		this.repaint();
-	}
+	//public void clearCanvas() {
+		//clear = true;
+		//PaintMessage msg = null;
+		//msg = new ClearMessage(this);
+		//this.getModule().sendMessage(msg);
+	//}
 
 	public void setDrawListener(DrawListener receivedListener) {
 		this.removeMouseListener(listener);
@@ -68,6 +71,14 @@ public class Canvas extends JComponent {
 		listener = receivedListener;
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
+	}
+	
+	public boolean isClear() {
+		return clear;
+	}
+
+	public void setClear(boolean clear){
+		this.clear = clear;
 	}
 
 	public NetworkModule getModule() {

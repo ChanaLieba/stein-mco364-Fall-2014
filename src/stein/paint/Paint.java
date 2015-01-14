@@ -7,7 +7,7 @@ public class Paint extends JFrame {
 
 	public Paint() {
 
-		this.setTitle("Paint");
+		this.setTitle("Chana Lieba Stein's Paint");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800, 600);
 		this.setLocationRelativeTo(null);

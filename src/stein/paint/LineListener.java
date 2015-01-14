@@ -8,41 +8,37 @@ import stein.paint.message.PaintMessage;
 import stein.paint.message.ShapeMessage;
 
 public class LineListener implements DrawListener {
-	
+
 	private int pointXclicked;
 	private int pointXreleased;
 	private int pointYclicked;
 	private int pointYreleased;
 	private Canvas canvas;
-	
-	public LineListener(Canvas canvas){
+
+	public LineListener(Canvas canvas) {
 		this.canvas = canvas;
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		pointXclicked = e.getX();
 		pointYclicked = e.getY();
-		//System.out.println("Mouse pressed is called");
-		
+
 	}
 
 	@Override
@@ -50,22 +46,20 @@ public class LineListener implements DrawListener {
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
 		draw();
-		
+
 	}
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		//get the xs and ys and then call canvas.repaint and canvas .
 		pointYreleased = e.getY();
 		pointXreleased = e.getX();
 		canvas.repaint();
-		
+
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -73,22 +67,16 @@ public class LineListener implements DrawListener {
 		g.setColor(canvas.getColor());
 		g.setStroke(canvas.getStroke());
 		g.drawLine(pointXclicked, pointYclicked, pointXreleased, pointYreleased);
-		//canvas.repaint();
-		
+
 	}
-	public void draw(){
-		//Graphics2D g2 = (Graphics2D)canvas.getImg().getGraphics();
-		//g2.setColor(canvas.getColor());
-		//g2.setStroke(canvas.getStroke());
-		//g2.drawLine(pointXclicked, pointYclicked, pointXreleased, pointYreleased);
-		//canvas.repaint();
-		
+
+	public void draw() {
+
 		PaintMessage msg = null;
-		msg = new LineMessage(pointXclicked, pointYclicked, pointXreleased, pointYreleased, canvas.getColor().getRGB(),
+		msg = new LineMessage(pointXclicked, pointYclicked, pointXreleased,
+				pointYreleased, canvas.getColor().getRGB(),
 				canvas.getStrokeInt());
 		canvas.getModule().sendMessage(msg);
 	}
-	
-	
 
 }

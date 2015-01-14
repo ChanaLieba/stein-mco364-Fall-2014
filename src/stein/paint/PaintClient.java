@@ -13,14 +13,13 @@ public class PaintClient {
 	private OutputStream output;
 
 	public PaintClient(Canvas canvas) throws UnknownHostException, IOException {
-		socket = new Socket("192.168.10.119", 3773);
+		socket = new Socket("localhost", 3773);
 		output = socket.getOutputStream();
 		PaintClientThread thr = new PaintClientThread(socket, canvas);
 		thr.start();
 	}
 
 	public void sendMessage(PaintMessage message) throws IOException {
-		//OutputStream output = socket.getOutputStream();
 		output.write(message.toString().getBytes());
 		output.flush();
 	}

@@ -28,7 +28,7 @@ public class PaintMessageFactory {
 					Integer.valueOf(elements[7]), Boolean.valueOf(elements[8]));
 			break;
 		case "CLEAR":
-			paintMessage = new ClearMessage();
+			paintMessage = new ClearMessage(canvas);
 			break;
 		case "BUCKET_FILL":
 			paintMessage = new BucketFillMessage(canvas, Integer.valueOf(elements[1]), Integer.valueOf(elements[2]),
